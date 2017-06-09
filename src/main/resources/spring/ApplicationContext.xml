@@ -19,10 +19,9 @@
 
     <!-- 启动组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
     <context:component-scan base-package="com.fh">
-        <context:exclude-filter type="annotation"
-                                expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
-
+    <!--Spring事务管理-->
     <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
@@ -30,7 +29,8 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>/WEB-INF/classes/dbconfig.properties</value>
+                <!--<value>/WEB-INF/classes/dbconfig.properties</value>-->
+                <value>classpath:dbconfig.properties</value>
             </list>
         </property>
     </bean>
@@ -83,7 +83,7 @@
 
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <!-- 事物处理 -->
+    <!-- 事务处理 -->
     <aop:config>
         <aop:pointcut id="pc" expression="execution(* com.fh.service..*(..))"/>
         <aop:advisor pointcut-ref="pc" advice-ref="txAdvice"/>
@@ -96,7 +96,7 @@
         <!-- mapper扫描 -->
         <property name="mapperLocations" value="classpath:mybatis/*/*.xml"></property>
     </bean>
-
+   <!--MyBatisSql模板代码-->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory"/>
     </bean>
@@ -134,6 +134,4 @@
         </property>
     </bean>
     <!-- ================ Shiro end ================ -->
-
-
 </beans>

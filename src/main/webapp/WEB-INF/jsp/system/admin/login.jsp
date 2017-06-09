@@ -22,8 +22,7 @@
 </head>
 <body>
 
-<div
-        style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
+<div style="width:100%;text-align: center;margin: 0 auto;position: absolute;">
     <div id="loginbox">
         <form action="" method="post" name="loginForm"
               id="loginForm">
@@ -111,6 +110,7 @@
             var loginname = $("#loginname").val();
             var password = $("#password").val();
             var code = "qq313596790fh" + loginname + ",fh," + password + "QQ978336446fh" + ",fh," + $("#code").val();
+            console.log("request key data code:" + code);
             $.ajax({
                 type: "POST",
                 url: 'login_login',

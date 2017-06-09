@@ -17,6 +17,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -86,13 +87,14 @@ public class LoginController extends BaseController {
     /**
      * 请求登录，验证用户
      */
-    @RequestMapping(value = "/login_login", produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/login_login", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
     @ResponseBody
     public Object login() throws Exception {
         Map<String, String> map = new HashMap<String, String>();
         PageData pd = new PageData();
         pd = this.getPageData();
         String errInfo = "";
+        //demo:qq313596790fh admin,fh,1 QQ978336446fh,fh,suc3
         String KEYDATA[] = pd.getString("KEYDATA").replaceAll("qq313596790fh", "").replaceAll("QQ978336446fh", "").split(",fh,");
 
         if (null != KEYDATA && KEYDATA.length == 3) {
